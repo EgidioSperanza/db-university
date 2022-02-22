@@ -13,6 +13,11 @@ SELECT *
 FROM `students`
 WHERE YEAR(CURRENT_DATE) - YEAR(`date_of_birth`) > 30
 ORDER BY `date_of_birth`;
+--OPPURE
+SELECT *
+FROM `students`
+WHERE DATEDIFF(CURRENT_DATE, `date_of_birth`)> 30*365
+ORDER BY `date_of_birth`;
 -- 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 SELECT *
 FROM `courses`
