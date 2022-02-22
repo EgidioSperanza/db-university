@@ -9,11 +9,17 @@ FROM `courses`
 WHERE `cfu` > 10;
 ORDER BY `name`;
 -- 3. Selezionare tutti gli studenti che hanno più di 30 anni
+-- BEST SOLUTION
+SELECT * 
+FROM `students` 
+WHERE TIMESTAMPDIFF ( YEAR, `date_of_birth`, CURRENT_DATE ) > 30 
+ORDER BY `date_of_birth`;
+-- OR
 SELECT *
 FROM `students`
 WHERE YEAR(CURRENT_DATE) - YEAR(`date_of_birth`) > 30
 ORDER BY `date_of_birth`;
---OPPURE
+-- OR
 SELECT *
 FROM `students`
 WHERE DATEDIFF(CURRENT_DATE, `date_of_birth`)> 30*365
@@ -24,7 +30,7 @@ FROM `courses`
 WHERE `period` = 'I semestre'
     AND `year` = 1
 ORDER BY `name` 
---OPPURE
+-- OR
 SELECT *
 FROM `courses`
 WHERE `period` LIKE "I %"
