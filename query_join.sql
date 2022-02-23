@@ -53,3 +53,17 @@ WHERE
 ORDER BY CONCAT(`teachers`.`surname`, " " , `teachers`.`name`)
 -- 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per
 -- superare ciascuno dei suoi esami
+SELECT CONCAT(`students`.`surname`, " ", `students`.`surname`) AS "Students", 
+        `courses`.`name` AS "Exam", 
+        COUNT(`exam_student`.`exam_id`) AS "Attempts", 
+        MAX(`exam_student`.`vote`)
+FROM `students`
+INNER JOIN `exam_student`
+	ON `exam_student`.`student_id`=`students`.`id`
+INNER JOIN `exams`
+	ON `exams`.`id`=`exam_student`.`exam_id`
+INNER JOIN `courses`
+	ON `courses`.`id`= `exams`.`course_id`
+WHERE `exam_student`.`vote`>=18
+GROUP BY CONCAT(`students`.`surname`, " ", `students`.`surname`), `courses`.`name`
+ORDER BY CONCAT(`students`.`surname`, " ", `students`.`surname`)
