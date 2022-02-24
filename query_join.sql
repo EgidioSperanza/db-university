@@ -2,13 +2,13 @@
 SELECT CONCAT(`students`.`name`, " ", `students`.`surname`) AS "Studenti iscritti ad Economia"
 FROM `students`
 INNER JOIN `degrees` 
-ON `students`.`degree_id` = `degrees`.`id`
+	ON `students`.`degree_id` = `degrees`.`id`
 WHERE `degrees`.`name` LIKE '%economia%'
 -- 2. Selezionare tutti i Corsi di Laurea del Dipartimento di Neuroscienze
 SELECT *
 FROM `degrees`
 INNER JOIN `departments`
-ON `department_id`= `degrees`.`department_id`
+	ON `department_id`= `degrees`.`department_id`
 WHERE `departments`.`name` LIKE '%neuroscienz%'
 -- 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
 SELECT CONCAT(`teachers`.`name`, " ", `teachers`.`surname`) AS "Teacher", `courses`.`name` AS "Course"
@@ -53,7 +53,7 @@ WHERE
 ORDER BY CONCAT(`teachers`.`surname`, " " , `teachers`.`name`)
 -- 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per
 -- superare ciascuno dei suoi esami
-SELECT CONCAT(`students`.`surname`, " ", `students`.`surname`) AS "Students", 
+SELECT CONCAT(`students`.`surname`, " ", `students`.`name`) AS "Students", 
         `courses`.`name` AS "Exam", 
         COUNT(`exam_student`.`exam_id`) AS "Attempts", 
         MAX(`exam_student`.`vote`)
